@@ -1,6 +1,8 @@
 # MaGuru Core for Magento 2
 
 ![Magento 2](https://img.shields.io/badge/Magento-2.4%2B-brightgreen)
+[![First Beta Version](https://poser.pugx.org/maguru/magento2-core/v/stable)](https://packagist.org/packages/maguru/magento2-core)
+[![Total Downloads](https://poser.pugx.org/maguru/magento2-core/downloads)](https://packagist.org/packages/maguru/magento2-core)
 
 <img width="150" height="100" src="documentation/images/made_in_ukraine.jpeg">
 
@@ -22,7 +24,7 @@
 #### 1.1 Install
 
 ```
-composer require maguru/module-core
+composer require maguru/magento2-core
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
@@ -30,7 +32,7 @@ php bin/magento setup:static-content:deploy
 #### 1.2 Upgrade
 
 ```
-composer update maguru/module-core
+composer update maguru/magento2-core
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
@@ -45,7 +47,7 @@ php bin/magento setup:di:compile
 
 If you don't want to install via composer, you can use this way.
 
-- Download [the latest version here](https://github.com/MaGuruDev/Core/archive/refs/heads/master.zip)
+- Download [the latest version here](https://github.com/MaGuruDev/Core/archive/refs/tags/v1.0.1.zip)
 - Extract `master.zip` file to `app/code/MaGuru/Core` ; You should create a folder path `app/code/MaGuru/Core` if not exist.
 - Go to Magento root folder and run upgrade command line to install `MaGuru_Core`:
 
