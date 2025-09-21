@@ -1,0 +1,32 @@
+{
+  "name": "maguru/magento2-core",
+  "description": "MaGuru core extension",
+  "keywords": [
+    "magento 2",
+    "maguru core extension"
+  ],
+  "license": [
+    "proprietary"
+  ],
+  "support": {
+    "email": "maguru.sup@gmail.com",
+    "issues": "https://github.com/MaGuruDev/Core/issues"
+  },
+  "authors": [
+    {
+      "name": "Andrii Zakharchuk",
+      "email": "maguru.sup@gmail.com",
+      "role": "Leader"
+    }
+  ],
+  "type": "magento2-module",
+  "version": "1.0.1",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "MaGuru\\Core\\": ""
+    }
+  }
+}

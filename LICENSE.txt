@@ -1,0 +1,25 @@
+PROPRIETARY LICENSE AGREEMENT
+
+This software is proprietary and confidential. All rights reserved.
+
+License Grant:
+MaGuru grants you a non-exclusive, non-transferable license to use
+the Mono Checkout extension for Magento 2 on a single production domain and one development/staging environment.
+
+Restrictions:
+- You may not redistribute, resell, or transfer the software
+- You may not reverse engineer, decompile, or disassemble the code
+- You may not remove any copyright notices
+
+Usage Rights:
+- One license per production domain
+- Unlimited development/staging environments
+- Lifetime updates for the major version
+- 6 months included support
+
+Termination:
+This license terminates automatically if you breach any of its terms.
+
+MaGuru - https://github.com/MaGuruDev
+Contact: maguru.sup@gmail.com
+Effective Date: September 15, 2025
