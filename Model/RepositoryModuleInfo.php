@@ -38,10 +38,16 @@ class RepositoryModuleInfo implements RepositoryModuleInfoInterface
             'MaGuru_MonoCheckout' => [
                 'name'        => 'MaGuru_MonoCheckout',
                 'description' => 'MaGuru MonoCheckout Extension',
+                'is_active'   => false,
+                'version'     => '1.0.1'
+            ],
+            'MaGuru_Language_uk_UA' => [
+                'name'        => 'MaGuru_Language_uk_UA',
+                'description' => 'MaGuru Language Pack uk_UA',
                 'is_active'   => true,
-                'version'     => '1.0.1',
-                'change_log'  => 'https://github.com/MaGuruDev/MonoCheckout/blob/main/CHANGELOG.md',
-                'user_guide'  => 'https://github.com/MaGuruDev/MonoCheckout/blob/main/README.md',
+                'version'     => '1.0.7',
+                'change_log'  => 'https://github.com/MaGuruDev/Language_uk_UA/blob/master/CHANGELOG.md',
+                'user_guide'  => 'https://github.com/MaGuruDev/Language_uk_UA/blob/master/README.md',
             ]
         ];
     }

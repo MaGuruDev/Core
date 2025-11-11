@@ -47,7 +47,7 @@ php bin/magento setup:di:compile
 
 If you don't want to install via composer, you can use this way.
 
-- Download [the latest version here](https://github.com/MaGuruDev/Core/archive/refs/tags/v1.0.1.zip)
+- Download [the latest version here](https://github.com/MaGuruDev/Core/archive/refs/heads/master.zip)
 - Extract `master.zip` file to `app/code/MaGuru/Core` ; You should create a folder path `app/code/MaGuru/Core` if not exist.
 - Go to Magento root folder and run upgrade command line to install `MaGuru_Core`:
 
