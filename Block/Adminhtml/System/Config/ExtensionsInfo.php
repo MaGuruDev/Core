@@ -25,10 +25,9 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
  */
 class ExtensionsInfo extends Field
 {
-    const string STATUS_INSTALLED = 'installed';
-    const string STATUS_NEW       = 'new';
-    const array  TABLE_MAPPING
-                                  = [
+    const STATUS_INSTALLED = 'installed';
+    const STATUS_NEW       = 'new';
+    const TABLE_MAPPING    = [
             'name'       => 'Extension Name',
             'version'    => 'Version',
             'change_log' => 'Change Log',

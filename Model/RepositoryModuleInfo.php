@@ -39,7 +39,7 @@ class RepositoryModuleInfo implements RepositoryModuleInfoInterface
                 'name'        => 'MaGuru_MonoCheckout',
                 'description' => 'MaGuru MonoCheckout Extension',
                 'is_active'   => false,
-                'version'     => '1.0.1'
+                'version'     => '1.0.2'
             ],
             'MaGuru_Language_uk_UA' => [
                 'name'        => 'MaGuru_Language_uk_UA',

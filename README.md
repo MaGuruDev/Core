@@ -10,7 +10,7 @@
 
 ## Requirements
 
-* Magento Community Edition 2.1.x-2.4.x or Magento Enterprise Edition 2.1.x-2.4.x
+* Magento Community Edition 2.4.x
 * This module is required for other MaGuru extensions for Magento 2
 
 ## How to install & upgrade MaGuru_Core
