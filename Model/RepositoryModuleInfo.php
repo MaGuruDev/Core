@@ -35,11 +35,14 @@ class RepositoryModuleInfo implements RepositoryModuleInfoInterface
     private function load(): array
     {
         return [
-            'MaGuru_MonoCheckout' => [
-                'name'        => 'MaGuru_MonoCheckout',
-                'description' => 'MaGuru MonoCheckout Extension',
-                'is_active'   => false,
-                'version'     => '1.0.2'
+            'MaGuru_ProductTabs' => [
+                'name'        => 'MaGuru_ProductTabs',
+                'description' => 'MaGuru ProductTabs Extension',
+                'is_active'   => true,
+                'version'     => '1.0.0',
+                'change_log'  => 'https://github.com/MaGuruDev/DraggableProductTabs/blob/master/CHANGELOG.md',
+                'user_guide'  => 'https://github.com/MaGuruDev/DraggableProductTabs/blob/master/README.md',
+                'link'        => 'https://github.com/MaGuruDev/DraggableProductTabs',
             ],
             'MaGuru_Language_uk_UA' => [
                 'name'        => 'MaGuru_Language_uk_UA',
@@ -48,6 +51,7 @@ class RepositoryModuleInfo implements RepositoryModuleInfoInterface
                 'version'     => '1.0.7',
                 'change_log'  => 'https://github.com/MaGuruDev/Language_uk_UA/blob/master/CHANGELOG.md',
                 'user_guide'  => 'https://github.com/MaGuruDev/Language_uk_UA/blob/master/README.md',
+                'link'        => 'https://github.com/MaGuruDev/Language_uk_UA',
             ]
         ];
     }

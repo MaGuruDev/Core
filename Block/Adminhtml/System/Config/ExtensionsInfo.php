@@ -31,7 +31,8 @@ class ExtensionsInfo extends Field
             'name'       => 'Extension Name',
             'version'    => 'Version',
             'change_log' => 'Change Log',
-            'user_guide' => 'User Guide'
+            'user_guide' => 'User Guide',
+            'link'       => 'Download Link',
         ];
 
     /**
@@ -110,7 +111,7 @@ class ExtensionsInfo extends Field
         foreach (self::TABLE_MAPPING as $key => $label) {
             $data[$key] = match ($key) {
                 'version' => $this->getVersionResult($moduleName, $module),
-                'change_log', 'user_guide' => $this->getLinkResult($module->getData($key)),
+                'change_log', 'user_guide', 'link' => $this->getLinkResult($module->getData($key)),
                 default => $module->getData($key),
             };
         }
