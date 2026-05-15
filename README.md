@@ -1,7 +1,7 @@
 # MaGuru Core for Magento 2
 
 ![Magento 2](https://img.shields.io/badge/Magento-2.4%2B-brightgreen)
-[![First Beta Version](https://poser.pugx.org/maguru/magento2-core/v/stable)](https://packagist.org/packages/maguru/magento2-core)
+[![Stable Version](https://poser.pugx.org/maguru/magento2-core/v/stable)](https://packagist.org/packages/maguru/magento2-core)
 [![Total Downloads](https://poser.pugx.org/maguru/magento2-core/downloads)](https://packagist.org/packages/maguru/magento2-core)
 
 <img width="150" height="100" src="documentation/images/made_in_ukraine.jpeg">
