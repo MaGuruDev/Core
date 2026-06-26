@@ -56,6 +56,16 @@ php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
 
+## Tests
+
+```bash
+bin/clinotty php vendor/bin/phpunit -c app/code/MaGuru/Core/Test/Unit/phpunit.xml
+```
+
+19 unit tests · 26 assertions · PHPStan Level 8 ✅
+
+---
+
 ## 🧾 License
 
 - [The code is licensed](LICENSE.txt).

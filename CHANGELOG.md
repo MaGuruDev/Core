@@ -5,17 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.5] - 2026-06-26
+
+### Added
+
+- Unit tests: `CacheTest`, `RegistryTest`, `ModuleVersionTest`, `RepositoryModuleInfoTest`, `AbstractConfigTest` — 19 tests, 26 assertions, PHPStan Level 8 ✅
+- `README.md`: Tests section with PHPUnit command and test count
+
 ## [1.1.4] - 2026-06-26
+
+### Added
+
+- `.gitignore`: excludes `var/`, `generated/`, `vendor/`, `*.log`, and IDE files
 
 ### Changed
 
 - `Logger/AbstractHandler`: default log level changed from `DEBUG` to `WARNING` to avoid verbose output in production
 - `composer.json`: `license` changed from array to string (`"proprietary"`); description updated to reflect free-to-use nature; `version` field removed — versions are now managed via git tags
 - `composer.json`: PHP requirement extended to include `~8.4.0||~8.5.0` (PHP 8.1–8.5 supported)
-
-### Added
-
-- `.gitignore`: excludes `var/`, `generated/`, `vendor/`, `*.log`, and IDE files
 
 ## [1.1.3] - 2026-05-15
 
