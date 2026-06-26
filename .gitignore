@@ -1,1 +1,20 @@
+# Magento generated
+/var/
+/generated/
+/.cache/
+
+# Composer
+/vendor/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo

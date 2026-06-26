@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MaGuru. All rights reserved.
+ * This module is developed for Magento® by MaGuru.
+ * Magento® is a trademark of Adobe Inc.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MaGuru_Core::maguru"
+             title="MaGuru"
+             module="MaGuru_Core"
+             sortOrder="150"
+             resource="MaGuru_Core::extensions"/>
+        <add id="MaGuru_Core::extensions_info"
+             title="Extensions Info"
+             module="MaGuru_Core"
+             sortOrder="90"
+             parent="MaGuru_Core::maguru"
+             action="adminhtml/system_config/edit/section/maguru_extension"
+             resource="MaGuru_Core::config_section"/>
+    </menu>
+</config>

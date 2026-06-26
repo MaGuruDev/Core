@@ -25,11 +25,16 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
  */
 class ExtensionsInfo extends Field
 {
-    const STATUS_INSTALLED = 'installed';
-    const STATUS_NEW       = 'new';
-    const TABLE_MAPPING    = [
+    const STATUS_INSTALLED      = 'installed';
+    const STATUS_NEW            = 'new';
+    const DEV_STATUS_DEVELOPING  = 'in_development';
+    const DEV_STATUS_READY       = 'ready';
+    const DEV_STATUS_FOR_SALE    = 'for_sale';
+    const DEV_STATUS_PUBLIC_REPO = 'public_repo';
+    const TABLE_MAPPING         = [
             'name'       => 'Extension Name',
             'version'    => 'Version',
+            'dev_status' => 'Dev Status',
             'change_log' => 'Change Log',
             'user_guide' => 'User Guide',
             'link'       => 'Download Link',
@@ -57,7 +62,7 @@ class ExtensionsInfo extends Field
      * @param ModuleListInterface           $moduleList
      * @param ModuleVersionInterface        $moduleVersion
      * @param RepositoryModuleInfoInterface $repositoryModuleInfo
-     * @param array                         $data
+     * @param array<string, mixed>          $data
      * @param SecureHtmlRenderer|null       $secureRenderer
      */
     public function __construct(
@@ -77,7 +82,6 @@ class ExtensionsInfo extends Field
 
     /**
      * @param AbstractElement $element
-     *
      * @return string
      */
     public function render(AbstractElement $element): string
@@ -89,7 +93,8 @@ class ExtensionsInfo extends Field
 
         $sortedData = [];
 
-        foreach ($repositoryModules as $moduleName => $repositoryModule) {
+        foreach ($repositoryModules as $repositoryModule) {
+            $moduleName = (string)$repositoryModule->getData('name');
             $moduleData = $this->moduleList->getOne($moduleName);
 
             $sortedData[$moduleData ? self::STATUS_INSTALLED : self::STATUS_NEW][$moduleName] = $this->makeArrayData($repositoryModule, $moduleName);
@@ -101,8 +106,7 @@ class ExtensionsInfo extends Field
     /**
      * @param DataObject $module
      * @param string     $moduleName
-     *
-     * @return array
+     * @return array<string, mixed>
      */
     private function makeArrayData(DataObject $module, string $moduleName): array
     {
@@ -110,7 +114,8 @@ class ExtensionsInfo extends Field
 
         foreach (self::TABLE_MAPPING as $key => $label) {
             $data[$key] = match ($key) {
-                'version' => $this->getVersionResult($moduleName, $module),
+                'version'    => $this->getVersionResult($moduleName, $module),
+                'dev_status' => $this->getDevStatusBadge((string)$module->getData($key)),
                 'change_log', 'user_guide', 'link' => $this->getLinkResult($module->getData($key)),
                 default => $module->getData($key),
             };
@@ -120,11 +125,32 @@ class ExtensionsInfo extends Field
     }
 
     /**
-     * @param $link
-     *
+     * @param string $status
      * @return string
      */
-    private function getLinkResult($link): string
+    private function getDevStatusBadge(string $status): string
+    {
+        $map = [
+            self::DEV_STATUS_DEVELOPING  => ['In Development', '#f59e0b'],
+            self::DEV_STATUS_READY       => ['Ready',          '#3b82f6'],
+            self::DEV_STATUS_FOR_SALE    => ['For Sale',       '#22c55e'],
+            self::DEV_STATUS_PUBLIC_REPO => ['Public Repo',    '#8b5cf6'],
+        ];
+
+        [$label, $color] = $map[$status] ?? ['Unknown', '#9ca3af'];
+        $style = sprintf(
+            'background:%s;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;white-space:nowrap',
+            $color
+        );
+
+        return '<span style="' . $style . '">' . __($label) . '</span>';
+    }
+
+    /**
+     * @param mixed $link
+     * @return string
+     */
+    private function getLinkResult(mixed $link): string
     {
         return '<a target="_blank" href="' . $link . '">' . __('Link') . '</a>';
     }
@@ -132,7 +158,6 @@ class ExtensionsInfo extends Field
     /**
      * @param string     $moduleName
      * @param DataObject $module
-     *
      * @return string
      */
     private function getVersionResult(string $moduleName, DataObject $module): string
@@ -147,12 +172,11 @@ class ExtensionsInfo extends Field
             }
         }
 
-        return $repositoryVersion;
+        return (string)$repositoryVersion;
     }
 
     /**
-     * @param array $data
-     *
+     * @param array<string, array<string, array<string, mixed>>> $data
      * @return string
      */
     private function convertArrayToTable(array $data): string

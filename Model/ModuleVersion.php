@@ -89,7 +89,6 @@ class ModuleVersion implements ModuleVersionInterface
 
     /**
      * @param string $moduleName
-     *
      * @return string
      */
     private function get(string $moduleName): string

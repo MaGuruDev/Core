@@ -1,17 +1,25 @@
 ## Privacy Policy
-### MaGuruDev — Adobe Commerce Extensions
-Last updated: May 2026
+### MaGuru — MaGuru Core Extension for Magento 2
+Last updated: June 2026
 
-This Privacy Policy applies to all extensions published on Adobe Commerce Marketplace by MaGuruDev.
+This Privacy Policy describes how the MaGuru Core Extension for Magento 2 extension handles data.
 
-### No Data Collection
-My extensions do not collect, store, transmit, or process any personal data. They are standalone packages that operate entirely within your Magento installation. No connection to external servers or third-party services is made.
+### No External Data Transmission
+This extension operates entirely within your Magento installation.
+It does not transmit, send, or share any personal data with external servers,
+third-party services, or MaGuru.
 
-### No Account Required
-No user account or registration is required to install or use any of my extensions.
+### No Data Collection by MaGuru
+MaGuru does not collect, store, or process any data from your store or
+your customers through this extension.
 
 ### No Cookies
-My extensions do not set or use any cookies.
+This extension does not set or use any browser cookies.
+
+### No Account Required
+No MaGuru account or registration is required to install or use this
+extension.
 
 ### Contact
-If you have any questions about this Privacy Policy, you may contact me at: maguru.sup@gmail.com
+If you have questions about this Privacy Policy, contact:
+maguru.sup@gmail.com

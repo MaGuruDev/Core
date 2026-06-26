@@ -11,11 +11,13 @@ namespace MaGuru\Core\Api;
 
 /**
  * Interface RepositoryModuleInfoInterface
+ *
+ * @package MaGuru\Core\Api
  */
 interface RepositoryModuleInfoInterface
 {
     /**
-     * @return array
+     * @return array<int, \Magento\Framework\DataObject>
      */
     public function getList(): array;
 }

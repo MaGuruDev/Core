@@ -11,12 +11,13 @@ namespace MaGuru\Core\Api;
 
 /**
  * Interface ModuleVersionInterface
+ *
+ * @package MaGuru\Core\Api
  */
 interface ModuleVersionInterface
 {
     /**
      * @param string $moduleName
-     *
      * @return string
      */
     public function getModuleVersion(string $moduleName): string;
