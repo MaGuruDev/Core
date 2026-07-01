@@ -31,9 +31,14 @@ class ExtensionsInfo extends Field
     const DEV_STATUS_READY       = 'ready';
     const DEV_STATUS_FOR_SALE    = 'for_sale';
     const DEV_STATUS_PUBLIC_REPO = 'public_repo';
+    const STABILITY_STABLE = 'stable';
+    const STABILITY_BETA   = 'beta';
+    const STABILITY_ALPHA  = 'alpha';
+    const STABILITY_DEV    = 'dev';
     const TABLE_MAPPING         = [
             'name'       => 'Extension Name',
             'version'    => 'Version',
+            'stability'  => 'Stability',
             'dev_status' => 'Dev Status',
             'change_log' => 'Change Log',
             'user_guide' => 'User Guide',
@@ -115,6 +120,7 @@ class ExtensionsInfo extends Field
         foreach (self::TABLE_MAPPING as $key => $label) {
             $data[$key] = match ($key) {
                 'version'    => $this->getVersionResult($moduleName, $module),
+                'stability'  => $this->getStabilityBadge((string)($module->getData($key) ?? '')),
                 'dev_status' => $this->getDevStatusBadge((string)$module->getData($key)),
                 'change_log', 'user_guide', 'link' => $this->getLinkResult($module->getData($key)),
                 default => $module->getData($key),
@@ -122,6 +128,28 @@ class ExtensionsInfo extends Field
         }
 
         return $data;
+    }
+
+    /**
+     * @param string $stability
+     * @return string
+     */
+    private function getStabilityBadge(string $stability): string
+    {
+        $map = [
+            self::STABILITY_STABLE => ['Stable', '#22c55e'],
+            self::STABILITY_BETA   => ['Beta',   '#3b82f6'],
+            self::STABILITY_ALPHA  => ['Alpha',  '#f59e0b'],
+            self::STABILITY_DEV    => ['Dev',    '#9ca3af'],
+        ];
+
+        [$label, $color] = $map[$stability] ?? ['Unknown', '#9ca3af'];
+        $style = sprintf(
+            'background:%s;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;white-space:nowrap',
+            $color
+        );
+
+        return '<span style="' . $style . '">' . __($label) . '</span>';
     }
 
     /**
