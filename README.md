@@ -11,6 +11,7 @@
 ## Requirements
 
 * Magento Community Edition 2.4.x
+* PHP 8.1 - 8.5
 * This module is required for other MaGuru extensions for Magento 2
 
 ## How to install & upgrade MaGuru_Core
@@ -62,15 +63,15 @@ php bin/magento setup:static-content:deploy
 bin/clinotty php vendor/bin/phpunit -c app/code/MaGuru/Core/Test/Unit/phpunit.xml
 ```
 
-19 unit tests · 26 assertions · PHPStan Level 8 ✅
+65 unit tests, 120 assertions, PHPStan Level 8
 
 ---
 
-## 🧾 License
+## License
 
 - [The code is licensed](LICENSE.txt).
 
-## 🆘 Support
+## Support
 
 - **Email:** maguru.sup@gmail.com
 - **Issues:** [GitHub Issues](https://github.com/MaGuruDev/Core/issues)

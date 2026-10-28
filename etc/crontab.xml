@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MaGuru. All rights reserved.
+ * This module is developed for Magento® by MaGuru.
+ * Magento® is a trademark of Adobe Inc.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="maguru_core_retry_failed_queue_messages"
+             instance="MaGuru\Core\Cron\RetryFailedQueueMessages"
+             method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+    </group>
+</config>

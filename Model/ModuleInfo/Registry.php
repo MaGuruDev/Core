@@ -4,9 +4,11 @@
  * This module is developed for Magento® by MaGuru.
  * Magento® is a trademark of Adobe Inc.
  */
+declare(strict_types=1);
 
 namespace MaGuru\Core\Model\ModuleInfo;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Store\Model\Store;
 use MaGuru\Core\Api\ModuleVersionInterface;
@@ -22,6 +24,7 @@ class Registry
 {
     private const REGISTRY_URL = 'https://maguru-registry.maguru.workers.dev/modules.json';
     private const CACHE_KEY = 'maguru_core_registry_modules';
+    private const XML_PATH_SEND_USAGE_INFO = 'maguru_extension/info/send_usage_info';
 
     /**
      * Registry constructor.
@@ -31,6 +34,7 @@ class Registry
      * @param ProductMetadataInterface $productMetadata
      * @param ModuleVersionInterface $moduleVersion
      * @param LoggerInterface $logger
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         private readonly Curl                     $curl,
@@ -38,14 +42,29 @@ class Registry
         private readonly StoreManagerInterface    $storeManager,
         private readonly ProductMetadataInterface $productMetadata,
         private readonly ModuleVersionInterface   $moduleVersion,
-        private readonly LoggerInterface          $logger
+        private readonly LoggerInterface          $logger,
+        private readonly ScopeConfigInterface     $scopeConfig
     ) {}
+
+    /**
+     * The registry is contacted only when the merchant opted in to share the usage information.
+     *
+     * @return bool
+     */
+    public function isUsageInfoEnabled(): bool
+    {
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_SEND_USAGE_INFO);
+    }
 
     /**
      * @return array<mixed>
      */
     public function getModules(): array
     {
+        if (!$this->isUsageInfoEnabled()) {
+            return [];
+        }
+
         $cached = $this->cache->get(self::CACHE_KEY);
         if ($cached !== null) {
             return $cached;

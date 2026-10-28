@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MaGuru. All rights reserved.
+ * This module is developed for Magento® by MaGuru.
+ * Magento® is a trademark of Adobe Inc.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="maguru_core_queue_retry_log" resource="default" engine="innodb" comment="MaGuru Core: shared queue message retry ledger">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="varchar" name="module" nullable="false" length="64" comment="Owning module, e.g. MaGuru_MonoPayment"/>
+        <column xsi:type="varchar" name="topic" nullable="false" length="255" comment="Original queue topic"/>
+        <column xsi:type="text" name="payload" nullable="true" comment="Serialized message, plain or encrypted per is_encrypted"/>
+        <column xsi:type="boolean" name="is_encrypted" nullable="false" default="0" comment="Whether payload is encrypted"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="16" default="failed" comment="failed/retrying/exhausted/succeeded"/>
+        <column xsi:type="smallint" name="attempt_count" unsigned="true" nullable="false" default="0" comment="Retry attempts made so far"/>
+        <column xsi:type="smallint" name="max_retries" unsigned="true" nullable="false" default="5" comment="Retry budget captured at failure time"/>
+        <column xsi:type="int" name="base_delay_seconds" unsigned="true" nullable="false" default="300" comment="Backoff base delay captured at failure time"/>
+        <column xsi:type="int" name="max_delay_seconds" unsigned="true" nullable="false" default="1800" comment="Backoff cap captured at failure time"/>
+        <column xsi:type="text" name="last_error" nullable="true" comment="Message of the most recent exception"/>
+        <column xsi:type="datetime" name="next_retry_at" nullable="true" comment="Earliest time the row is eligible for retry; null means eligible now"/>
+        <column xsi:type="varchar" name="reference_type" nullable="true" length="64" comment="Optional owning-module entity type, e.g. invoice_id"/>
+        <column xsi:type="int" name="reference_id" unsigned="true" nullable="true" comment="Optional owning-module entity ID, for admin grid/debug cross-reference"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" nullable="false" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="true" on_update="true" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="MAGURU_CORE_QUEUE_RETRY_LOG_STATUS_NEXT_RETRY_AT" indexType="btree">
+            <column name="status"/>
+            <column name="next_retry_at"/>
+        </index>
+        <index referenceId="MAGURU_CORE_QUEUE_RETRY_LOG_MODULE" indexType="btree">
+            <column name="module"/>
+        </index>
+        <index referenceId="MAGURU_CORE_QUEUE_RETRY_LOG_TOPIC" indexType="btree">
+            <column name="topic"/>
+        </index>
+    </table>
+</schema>

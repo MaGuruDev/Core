@@ -22,6 +22,11 @@
                     <label>Extensions Info</label>
                     <frontend_model>MaGuru\Core\Block\Adminhtml\System\Config\ExtensionsInfo</frontend_model>
                 </field>
+                <field id="send_usage_info" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Share Store Domain and Versions</label>
+                    <comment>When loading the extensions list, also send this store's domain and the Magento, PHP and MaGuru versions to the MaGuru registry.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
         </section>
     </system>

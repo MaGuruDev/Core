@@ -21,5 +21,19 @@
              parent="MaGuru_Core::maguru"
              action="adminhtml/system_config/edit/section/maguru_extension"
              resource="MaGuru_Core::config_section"/>
+        <add id="MaGuru_Core::queue_retry_log"
+             title="Queue Retry Log"
+             module="MaGuru_Core"
+             sortOrder="95"
+             parent="MaGuru_Core::maguru"
+             action="maguru_core/queueretrylog/index"
+             resource="MaGuru_Core::queue_retry_log"/>
+        <!-- Shared "B2B" group for the menu items of all B2B modules -->
+        <add id="MaGuru_Core::b2b"
+             title="B2B"
+             module="MaGuru_Core"
+             sortOrder="35"
+             parent="MaGuru_Core::maguru"
+             resource="MaGuru_Core::extensions"/>
     </menu>
 </config>

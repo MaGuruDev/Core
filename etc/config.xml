@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MaGuru. All rights reserved.
+ * This module is developed for Magento® by MaGuru.
+ * Magento® is a trademark of Adobe Inc.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <maguru_extension>
+            <info>
+                <send_usage_info>0</send_usage_info>
+            </info>
+            <queue_retry>
+                <enabled>0</enabled>
+                <batch_size>50</batch_size>
+                <max_retries>5</max_retries>
+                <base_delay_seconds>300</base_delay_seconds>
+                <max_delay_seconds>1800</max_delay_seconds>
+            </queue_retry>
+        </maguru_extension>
+    </default>
+</config>

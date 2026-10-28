@@ -1,0 +1,30 @@
+{
+    "maguru_core_queue_retry_log": {
+        "column": {
+            "entity_id": true,
+            "module": true,
+            "topic": true,
+            "payload": true,
+            "is_encrypted": true,
+            "status": true,
+            "attempt_count": true,
+            "max_retries": true,
+            "base_delay_seconds": true,
+            "max_delay_seconds": true,
+            "last_error": true,
+            "next_retry_at": true,
+            "reference_type": true,
+            "reference_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGURU_CORE_QUEUE_RETRY_LOG_STATUS_NEXT_RETRY_AT": true,
+            "MAGURU_CORE_QUEUE_RETRY_LOG_MODULE": true,
+            "MAGURU_CORE_QUEUE_RETRY_LOG_TOPIC": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

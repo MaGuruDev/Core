@@ -35,6 +35,7 @@ class ExtensionsInfo extends Field
     const STABILITY_BETA   = 'beta';
     const STABILITY_ALPHA  = 'alpha';
     const STABILITY_DEV    = 'dev';
+    private const XML_PATH_SEND_USAGE_INFO = 'maguru_extension/info/send_usage_info';
     const TABLE_MAPPING         = [
             'name'       => 'Extension Name',
             'version'    => 'Version',
@@ -91,6 +92,10 @@ class ExtensionsInfo extends Field
      */
     public function render(AbstractElement $element): string
     {
+        if (!$this->_scopeConfig->isSetFlag(self::XML_PATH_SEND_USAGE_INFO)) {
+            return $this->renderLocalModules();
+        }
+
         $repositoryModules = $this->repositoryModuleInfo->getList();
         if (empty($repositoryModules)) {
             return '';
@@ -109,6 +114,35 @@ class ExtensionsInfo extends Field
     }
 
     /**
+     * Lists the installed MaGuru modules without contacting the registry.
+     *
+     * @return string
+     */
+    private function renderLocalModules(): string
+    {
+        $rows = [];
+        foreach ($this->moduleList->getNames() as $moduleName) {
+            if (strncmp($moduleName, 'MaGuru_', 7) !== 0) {
+                continue;
+            }
+            $rows[$moduleName] = [
+                'name' => $this->escapeHtml($moduleName),
+                'version' => $this->escapeHtml($this->moduleVersion->getModuleVersion($moduleName)),
+            ];
+        }
+        ksort($rows);
+
+        $notice = '<p class="message message-notice"><span>'
+            . $this->escapeHtml((string)__(
+                'Information about available extensions and updates is not loaded because '
+                . '"Share Store Domain and Versions" is disabled. Enable it to see it.'
+            ))
+            . '</span></p>';
+
+        return $notice . $this->convertArrayToTable([self::STATUS_INSTALLED => $rows], false);
+    }
+
+    /**
      * @param DataObject $module
      * @param string     $moduleName
      * @return array<string, mixed>
@@ -119,11 +153,11 @@ class ExtensionsInfo extends Field
 
         foreach (self::TABLE_MAPPING as $key => $label) {
             $data[$key] = match ($key) {
-                'version'    => $this->getVersionResult($moduleName, $module),
+                'version'    => $this->escapeHtml($this->getVersionResult($moduleName, $module)),
                 'stability'  => $this->getStabilityBadge((string)($module->getData($key) ?? '')),
                 'dev_status' => $this->getDevStatusBadge((string)$module->getData($key)),
                 'change_log', 'user_guide', 'link' => $this->getLinkResult($module->getData($key)),
-                default => $module->getData($key),
+                default => $this->escapeHtml((string)$module->getData($key)),
             };
         }
 
@@ -180,7 +214,12 @@ class ExtensionsInfo extends Field
      */
     private function getLinkResult(mixed $link): string
     {
-        return '<a target="_blank" href="' . $link . '">' . __('Link') . '</a>';
+        $url = is_string($link) ? trim($link) : '';
+        if (stripos($url, 'https://') !== 0) {
+            return '';
+        }
+
+        return '<a target="_blank" rel="noopener noreferrer" href="' . $this->escapeUrl($url) . '">' . __('Link') . '</a>';
     }
 
     /**
@@ -205,9 +244,10 @@ class ExtensionsInfo extends Field
 
     /**
      * @param array<string, array<string, array<string, mixed>>> $data
+     * @param bool $showNew
      * @return string
      */
-    private function convertArrayToTable(array $data): string
+    private function convertArrayToTable(array $data, bool $showNew = true): string
     {
         $html = '<h3>' . __('Instaled Extensions') . '</h3>';
         $html .= '<table class="admin__data-grid-wrap data-grid">';
@@ -229,6 +269,10 @@ class ExtensionsInfo extends Field
         }
 
         $html .= '</tbody></table><br/>';
+
+        if (!$showNew) {
+            return $html;
+        }
 
         $html .= '<h3>' . __('New Extensions') . '</h3>';
         $html .= '<table class="admin__data-grid-wrap data-grid">';

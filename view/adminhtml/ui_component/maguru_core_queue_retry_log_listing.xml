@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © MaGuru. All rights reserved.
+ * This module is developed for Magento® by MaGuru.
+ * Magento® is a trademark of Adobe Inc.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">maguru_core_queue_retry_log_listing.maguru_core_queue_retry_log_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="reset">
+                <url path="*/*/index"/>
+            </button>
+        </buttons>
+        <spinner>maguru_core_queue_retry_log_columns</spinner>
+        <deps>
+            <dep>maguru_core_queue_retry_log_listing.maguru_core_queue_retry_log_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="maguru_core_queue_retry_log_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>MaGuru_Core::queue_retry_log</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
+                      name="maguru_core_queue_retry_log_listing_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <exportButton name="export_button"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="maguru_core_queue_retry_log_columns">
+
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+
+        <column name="module">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Module</label>
+            </settings>
+        </column>
+
+        <column name="topic">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Topic</label>
+            </settings>
+        </column>
+
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="MaGuru\Core\Model\Config\Source\QueueRetryLogStatus"/>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+
+        <column name="attempt_count" class="Magento\Ui\Component\Listing\Columns\Column">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <label translate="true">Attempts</label>
+            </settings>
+        </column>
+
+        <column name="max_retries" class="Magento\Ui\Component\Listing\Columns\Column">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <label translate="true">Max Retries</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="last_error">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Last Error</label>
+            </settings>
+        </column>
+
+        <column name="next_retry_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Next Retry At</label>
+            </settings>
+        </column>
+
+        <column name="reference_type">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Reference Type</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="reference_id" class="Magento\Ui\Component\Listing\Columns\Column">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <label translate="true">Reference ID</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+
+    </columns>
+</listing>

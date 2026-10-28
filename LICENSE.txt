@@ -21,5 +21,30 @@ it into their Magento installation, subject to the following conditions:
    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. IN NO
    EVENT SHALL MAGURU BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY.
 
-MaGuru — https://github.com/MaGuruDev
+4. Limitation of Liability
+   TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL MAGURU'S
+   AGGREGATE LIABILITY EXCEED THE AMOUNT PAID FOR THE SOFTWARE (I.E., ZERO).
+   MAGURU SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL,
+   CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST DATA,
+   OR BUSINESS INTERRUPTION, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.
+
+5. No Obligation to Support
+   MaGuru has no obligation to provide updates, maintenance, bug fixes, or
+   technical support. Compatibility with future Magento releases is not
+   guaranteed.
+
+6. No Fitness for Production
+   User is solely responsible for testing the Software in a non-production
+   environment prior to deployment on a live store.
+
+7. Governing Law
+   This license is governed by the laws of Ukraine. Any dispute shall be
+   resolved in the courts of Ukraine.
+
+8. Contributions
+   By submitting a contribution (e.g., a pull request), you grant MaGuru a
+   perpetual, irrevocable, worldwide, royalty-free license to use, modify,
+   and relicense your contribution as part of the Software.
+
+MaGuru - https://github.com/MaGuruDev
 Contact: maguru.sup@gmail.com

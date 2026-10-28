@@ -23,7 +23,7 @@ use PHPUnit\Framework\TestCase;
 class AbstractConfigTest extends TestCase
 {
     private ScopeConfigInterface&MockObject $scopeConfig;
-    private AbstractConfig $config;
+    private TestableAbstractConfig $config;
 
     /**
      * @return void
@@ -31,38 +31,7 @@ class AbstractConfigTest extends TestCase
     protected function setUp(): void
     {
         $this->scopeConfig = $this->createMock(ScopeConfigInterface::class);
-
-        $this->config = new class ($this->scopeConfig) extends AbstractConfig {
-            /**
-             * @param string $path
-             * @param int|string|null $scopeCode
-             * @return string
-             */
-            public function publicGetValue(string $path, int|string|null $scopeCode = null): string
-            {
-                return $this->getValue($path, $scopeCode);
-            }
-
-            /**
-             * @param string $path
-             * @param int|string|null $scopeCode
-             * @return int
-             */
-            public function publicGetIntValue(string $path, int|string|null $scopeCode = null): int
-            {
-                return $this->getIntValue($path, $scopeCode);
-            }
-
-            /**
-             * @param string $path
-             * @param int|string|null $scopeCode
-             * @return bool
-             */
-            public function publicIsFlag(string $path, int|string|null $scopeCode = null): bool
-            {
-                return $this->isFlag($path, $scopeCode);
-            }
-        };
+        $this->config = new TestableAbstractConfig($this->scopeConfig);
     }
 
     /**
@@ -111,5 +80,43 @@ class AbstractConfigTest extends TestCase
             ->willReturn('store_value');
 
         $this->assertSame('store_value', $this->config->publicGetValue('some/config/path', 2));
+    }
+}
+
+/**
+ * Class TestableAbstractConfig
+ *
+ * @package MaGuru\Core\Test\Unit\Model
+ */
+final class TestableAbstractConfig extends AbstractConfig
+{
+    /**
+     * @param string $path
+     * @param int|string|null $scopeCode
+     * @return string
+     */
+    public function publicGetValue(string $path, int|string|null $scopeCode = null): string
+    {
+        return $this->getValue($path, $scopeCode);
+    }
+
+    /**
+     * @param string $path
+     * @param int|string|null $scopeCode
+     * @return int
+     */
+    public function publicGetIntValue(string $path, int|string|null $scopeCode = null): int
+    {
+        return $this->getIntValue($path, $scopeCode);
+    }
+
+    /**
+     * @param string $path
+     * @param int|string|null $scopeCode
+     * @return bool
+     */
+    public function publicIsFlag(string $path, int|string|null $scopeCode = null): bool
+    {
+        return $this->isFlag($path, $scopeCode);
     }
 }

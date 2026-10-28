@@ -9,9 +9,23 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="MaGuru\Core\Api\RepositoryModuleInfoInterface" type="MaGuru\Core\Model\RepositoryModuleInfo"/>
     <preference for="MaGuru\Core\Api\ModuleVersionInterface" type="MaGuru\Core\Model\ModuleVersion"/>
+    <preference for="MaGuru\Core\Api\RetryManagerInterface" type="MaGuru\Core\Model\Queue\RetryManager"/>
+    <preference for="MaGuru\Core\Api\QueueRetryLoggerInterface" type="MaGuru\Core\Model\Queue\QueueRetryLogger"/>
+    <preference for="MaGuru\Core\Api\QueueRetryPolicyProviderInterface" type="MaGuru\Core\Model\Queue\Config"/>
+    <preference for="MaGuru\Core\Api\RetryHandlerPoolInterface" type="MaGuru\Core\Model\Queue\RetryHandlerPool"/>
+    <preference for="MaGuru\Core\Api\QueueRetryLogRepositoryInterface" type="MaGuru\Core\Model\QueueRetryLogRepository"/>
+    <preference for="MaGuru\Core\Api\Data\QueueRetryLogInterface" type="MaGuru\Core\Model\Data\QueueRetryLog"/>
     <type name="MaGuru\Core\Model\ModuleVersion">
         <arguments>
             <argument name="driver" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <!-- Admin grid collection -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="maguru_core_queue_retry_log_listing_data_source" xsi:type="string">MaGuru\Core\Model\ResourceModel\QueueRetryLog\Grid\Collection</item>
+            </argument>
         </arguments>
     </type>
 </config>

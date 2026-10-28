@@ -11,6 +11,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="MaGuru_Core::extensions" title="MaGuru Extensions" sortOrder="100"/>
+                <resource id="MaGuru_Core::queue_retry_log" title="MaGuru Queue Retry Log" sortOrder="110"/>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">

@@ -32,6 +32,7 @@ class RegistryTest extends TestCase
     private StoreManagerInterface&MockObject $storeManager;
     private ProductMetadataInterface&MockObject $productMetadata;
     private ModuleVersionInterface&MockObject $moduleVersion;
+    private \Magento\Framework\App\Config\ScopeConfigInterface&MockObject $scopeConfig;
     private LoggerInterface&MockObject $logger;
     private Registry $registry;
 
@@ -46,6 +47,8 @@ class RegistryTest extends TestCase
         $this->productMetadata = $this->createMock(ProductMetadataInterface::class);
         $this->moduleVersion   = $this->createMock(ModuleVersionInterface::class);
         $this->logger          = $this->createMock(LoggerInterface::class);
+        $this->scopeConfig     = $this->createMock(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+        $this->scopeConfig->method('isSetFlag')->willReturn(true);
 
         $this->registry = new Registry(
             $this->curl,
@@ -53,7 +56,8 @@ class RegistryTest extends TestCase
             $this->storeManager,
             $this->productMetadata,
             $this->moduleVersion,
-            $this->logger
+            $this->logger,
+            $this->scopeConfig
         );
     }
 
@@ -82,6 +86,49 @@ class RegistryTest extends TestCase
         $this->curl->method('getBody')->willReturn(json_encode(['modules' => $modules]));
 
         $this->assertSame($modules, $this->registry->getModules());
+    }
+
+    /**
+     * @return void
+     */
+    public function testRegistryIsNotContactedUnlessTheMerchantOptedIn(): void
+    {
+        $scopeConfig = $this->createMock(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+        $scopeConfig->method('isSetFlag')->willReturn(false);
+        $registry = new Registry(
+            $this->curl,
+            $this->cache,
+            $this->storeManager,
+            $this->productMetadata,
+            $this->moduleVersion,
+            $this->logger,
+            $scopeConfig
+        );
+        $this->cache->expects($this->never())->method('get');
+        $this->curl->expects($this->never())->method('get');
+
+        $this->assertFalse($registry->isUsageInfoEnabled());
+        $this->assertSame([], $registry->getModules());
+    }
+
+    /**
+     * @return void
+     */
+    public function testStoreDetailsAreSentWhenTheMerchantOptedIn(): void
+    {
+        $this->cache->method('get')->willReturn(null);
+        $this->setUpHttpMocks();
+        $this->curl->method('getBody')->willReturn(json_encode(['modules' => [['name' => 'MaGuru_Core']]]));
+
+        $headers = [];
+        $this->curl->method('addHeader')->willReturnCallback(function (string $name) use (&$headers): void {
+            $headers[] = $name;
+        });
+
+        $this->registry->getModules();
+
+        $this->assertContains('X-Source-Domain', $headers);
+        $this->assertContains('X-PHP-Version', $headers);
     }
 
     /**

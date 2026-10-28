@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MaGuru. All rights reserved.
+ * This module is developed for Magento® by MaGuru.
+ * Magento® is a trademark of Adobe Inc.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Separator above the B2B links (Company 148 ... Shared Carts 145); sorts descending -->
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\Delimiter"
+                   name="customer-account-navigation-b2b-delimiter"
+                   template="Magento_Customer::account/navigation-delimiter.phtml">
+                <arguments>
+                    <argument name="sortOrder" xsi:type="number">149</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
